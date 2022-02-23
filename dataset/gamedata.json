@@ -1,0 +1,55 @@
+{
+	"name": "gamedata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Year": {
+				"type": "string"
+			},
+			"Month": {
+				"type": "string"
+			},
+			"Day": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@{dataset().Day}.csv",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "gamedata/@{dataset().Year}/@{dataset().Month}",
+					"type": "Expression"
+				},
+				"container": "adf-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Player",
+				"type": "String"
+			},
+			{
+				"name": "Time",
+				"type": "String"
+			},
+			{
+				"name": "Points",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

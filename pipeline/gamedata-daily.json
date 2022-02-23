@@ -1,0 +1,78 @@
+{
+	"name": "gamedata-daily",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "gamedata",
+						"type": "DatasetReference",
+						"parameters": {
+							"Year": {
+								"value": "@{formatDateTime(utcnow(), 'yyyy')}",
+								"type": "Expression"
+							},
+							"Month": "@{formatDateTime(utcnow(), 'MM')}",
+							"Day": "@{formatDateTime(utcnow(), 'dd')}"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SQL_gamedata",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"variables": {
+			"Year": {
+				"type": "String",
+				"defaultValue": "2016"
+			}
+		},
+		"annotations": [
+			"day"
+		],
+		"lastPublishTime": "2022-02-23T14:56:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "adf-vd-lab",
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f4ce6117-59b3-4e62-a337-7451db60e82d",
+		"tenantId": "d6397071-8e3e-45d2-a2d6-36698acf0fea"
+	}
+}

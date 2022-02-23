@@ -1,0 +1,32 @@
+{
+	"name": "Daily",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2022-02-23T14:59:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						12
+					]
+				}
+			}
+		}
+	}
+}
